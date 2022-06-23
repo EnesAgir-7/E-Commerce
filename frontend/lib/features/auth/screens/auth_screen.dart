@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
-import 'package:ea_software/common/widgets/custom_buttom.dart';
+import 'package:ea_software/common/widgets/custom_button.dart';
 import 'package:ea_software/common/widgets/custom_textfield.dart';
 import 'package:ea_software/constants/global_variables.dart';
+import 'package:ea_software/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 enum Auth {
@@ -24,6 +23,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final _singUpFormKey = GlobalKey<FormState>();
   final _singInFormKey = GlobalKey<FormState>();
 
+  final AuthService authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -34,6 +34,10 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(context: context, email: _emailController.text, password: _passwordController.text, name: _nameController.text);
   }
 
   @override
@@ -79,13 +83,34 @@ class _AuthScreenState extends State<AuthScreen> {
                   key: _singUpFormKey,
                   child: Column(
                     children: [
-                      CustomTextField(controller: _nameController,hintText: 'Name',),
-                      const SizedBox(height: 10,),
-                      CustomTextField(controller: _emailController,hintText: 'Email',),
-                      const SizedBox(height: 10,),
-                      CustomTextField(controller: _passwordController,hintText: 'Password',),
-                      const SizedBox(height: 10,),
-                      CustomButton(onTap: () {}, text: 'Sing Up')
+                      CustomTextField(
+                        controller: _nameController,
+                        hintText: 'Name',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        controller: _emailController,
+                        hintText: 'Email',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomButton(
+                          onTap: () {
+                            if (_singInFormKey.currentState!.validate()) {
+                              signUpUser();
+                            }
+                          },
+                          text: 'Sing Up')
                     ],
                   ),
                 ),
@@ -115,10 +140,20 @@ class _AuthScreenState extends State<AuthScreen> {
                   key: _singUpFormKey,
                   child: Column(
                     children: [
-                      CustomTextField(controller: _emailController,hintText: 'Email',),
-                      const SizedBox(height: 10,),
-                      CustomTextField(controller: _passwordController,hintText: 'Password',),
-                      const SizedBox(height: 10,),
+                      CustomTextField(
+                        controller: _emailController,
+                        hintText: 'Email',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       CustomButton(onTap: () {}, text: 'Sing Up')
                     ],
                   ),
