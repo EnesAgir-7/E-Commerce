@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ea_software/constants/utils.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 void httpErrorHandle({
@@ -14,7 +14,6 @@ void httpErrorHandle({
       onSuccess();
       break;
     case 400:
-      showSnackBar(context, jsonDecode(response.body)['msg']);
       break;
     case 500:
       showSnackBar(context, jsonDecode(response.body)['error']);

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({Key? key, required this.controller, required this.hintText}) : super(key: key);
   final TextEditingController controller;
   final String hintText;
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.hintText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class CustomTextField extends StatelessWidget {
         }
         return null;
       },
+      
     );
   }
 }
