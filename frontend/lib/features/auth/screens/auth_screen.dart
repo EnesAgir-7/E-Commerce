@@ -4,7 +4,6 @@ import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-
 enum Auth {
   signin,
   signup,
@@ -41,6 +40,14 @@ class _AuthScreenState extends State<AuthScreen> {
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
+    );
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
   }
 
@@ -159,7 +166,9 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomButton(
                           text: 'Sign In',
                           onTap: () {
-                            
+                            if (_signInFormKey.currentState!.validate()) {
+                              signInUser();
+                            }
                           },
                         )
                       ],
