@@ -1,6 +1,5 @@
 import 'package:ea_software/common/bottom_bar.dart';
 import 'package:ea_software/constants/global_variables.dart';
-import 'package:ea_software/features/auth/home/screens/home_screen.dart';
 import 'package:ea_software/features/auth/screens/auth_screen.dart';
 import 'package:ea_software/features/auth/services/auth_service.dart';
 import 'package:ea_software/providers/user_provider.dart';

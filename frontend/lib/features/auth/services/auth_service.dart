@@ -4,7 +4,6 @@ import 'package:ea_software/common/bottom_bar.dart';
 import 'package:ea_software/constants/error_handling.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/constants/utils.dart';
-import 'package:ea_software/features/auth/home/screens/home_screen.dart';
 import 'package:ea_software/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
