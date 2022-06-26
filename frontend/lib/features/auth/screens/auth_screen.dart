@@ -1,5 +1,5 @@
-import 'package:ea_software/common/widgets/custom_button.dart';
-import 'package:ea_software/common/widgets/custom_textfield.dart';
+import 'package:ea_software/common/custom_button.dart';
+import 'package:ea_software/common/custom_textfield.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';

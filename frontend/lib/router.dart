@@ -1,4 +1,4 @@
-import 'package:ea_software/common/widgets/bottom_bar.dart';
+import 'package:ea_software/common/bottom_bar.dart';
 import 'package:ea_software/features/auth/home/screens/home_screen.dart';
 import 'package:ea_software/features/auth/screens/auth_screen.dart';
 import 'package:flutter/material.dart';

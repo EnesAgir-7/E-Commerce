@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ea_software/common/widgets/bottom_bar.dart';
+import 'package:ea_software/common/bottom_bar.dart';
 import 'package:ea_software/constants/error_handling.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/constants/utils.dart';
