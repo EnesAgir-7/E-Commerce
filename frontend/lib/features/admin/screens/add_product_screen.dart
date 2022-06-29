@@ -6,6 +6,7 @@ import 'package:ea_software/common/custom_button.dart';
 import 'package:ea_software/common/custom_textfield.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/constants/utils.dart';
+import 'package:ea_software/features/admin/services/admin_services.dart';
 import 'package:flutter/material.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  final AdminServices adminServices = AdminServices();
   final TextEditingController productNameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
@@ -24,10 +26,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   String category = 'Mobiles';
   List<File> images = [];
+  final _addProductFormKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     productNameController.dispose();
     descriptionController.dispose();
@@ -43,7 +45,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Fashion',
   ];
 
-  void selectImage() async {
+  void sellProduct() {
+    if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
+      adminServices.sellProduct(
+        context: context,
+        name: productNameController.text,
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: double.parse(quantityController.text),
+        category: category,
+        images: images,
+      );
+    }
+  }
+
+  void selectImages() async {
     var res = await pickImage();
     setState(() {
       images = res;
@@ -70,6 +86,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -96,7 +113,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ),
                       )
                     : GestureDetector(
-                        onTap: selectImage,
+                        onTap: selectImages,
                         child: DottedBorder(
                           borderType: BorderType.RRect,
                           radius: const Radius.circular(10),
@@ -172,7 +189,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                CustomButton(onTap: () {}, text: 'Sell')
+                CustomButton(onTap: sellProduct, text: 'Sell')
               ],
             ),
           ),

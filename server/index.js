@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const adminRouter = require('./routes/admin');
 
 const authRouter = require('./routes/auth');
 
@@ -11,6 +12,7 @@ const app = express();
 //! middleware
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 //! Database connections
 mongoose.connect(DB).then(()=>{
