@@ -1,5 +1,6 @@
 import 'package:ea_software/common/bottom_bar.dart';
 import 'package:ea_software/features/admin/screens/add_product_screen.dart';
+import 'package:ea_software/features/home/screens/category_deal_screen.dart';
 import 'package:ea_software/features/home/screens/home_screen.dart';
 import 'package:ea_software/features/auth/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) =>const AddProductScreen(),
+      );
+    case CategoryDealScreen.routeName:
+    var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => CategoryDealScreen(
+          category: category,
+        ),
       );
     default: 
       return MaterialPageRoute(
