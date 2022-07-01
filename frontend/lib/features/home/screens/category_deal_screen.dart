@@ -1,6 +1,7 @@
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/constants/loader.dart';
 import 'package:ea_software/features/home/services/home_services.dart';
+import 'package:ea_software/features/product_details/product_details_screen.dart';
 import 'package:ea_software/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -68,30 +69,33 @@ class _CategoryDealScreenState extends State<CategoryDealScreen> {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, childAspectRatio: 1.4, mainAxisSpacing: 10),
                     itemBuilder: (context, index) {
                       final product = productList![index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 130,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black12, width: 0.5),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.network(product.images[0]),
+                      return GestureDetector(
+                        onTap: (() => Navigator.pushNamed(context, ProductDetailScreen.routeName,arguments: product)),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black12, width: 0.5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.network(product.images[0]),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.topCenter,
-                            padding: const EdgeInsets.only(top: 5, left: 0, right: 15),
-                            child: Text(
-                              product.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          )
-                        ],
+                            Container(
+                              alignment: Alignment.topCenter,
+                              padding: const EdgeInsets.only(top: 5, left: 0, right: 15),
+                              child: Text(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     },
                   ),

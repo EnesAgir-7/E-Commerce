@@ -3,7 +3,9 @@ import 'package:ea_software/features/admin/screens/add_product_screen.dart';
 import 'package:ea_software/features/home/screens/category_deal_screen.dart';
 import 'package:ea_software/features/home/screens/home_screen.dart';
 import 'package:ea_software/features/auth/screens/auth_screen.dart';
+import 'package:ea_software/features/product_details/product_details_screen.dart';
 import 'package:ea_software/features/search/search_screen.dart';
+import 'package:ea_software/models/product.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -44,6 +46,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => SearchScreen(
           searchQuery: searchQuery,
+        ),
+      );
+    case ProductDetailScreen.routeName:
+    var product = routeSettings.arguments as Product;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ProductDetailScreen(
+          product: product,
         ),
       );
     default: 
