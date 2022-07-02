@@ -4,10 +4,10 @@ const { Product } = require("../models/product");
 const User = require("../models/user");
 const userRouter = express.Router();
 
-userRouter.post("api/add-to-cart", auth, async(req, res)=>{
+userRouter.post("/api/add-to-cart", auth, async(req, res)=>{
     try {
         const {id} = req.body;
-        const product = await Product.find(id);
+        const product = await Product.findById(id);
         let user = await User.findById(req.user);
 
         if (user.card.length == 0) {
