@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const {
-    productSchema
-} = require('./product');
+const { productSchema } = require("./product");
 
 const userSchema = mongoose.Schema({
     name: {
@@ -14,12 +12,13 @@ const userSchema = mongoose.Schema({
         type: String,
         trim: true,
         validate: {
-            validator: (value) => {
-                const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-                return value.match(re);
-            },
-            message: 'Please enter a valid email address'
-        }
+        validator: (value) => {
+            const re =
+            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            return value.match(re);
+        },
+        message: "Please enter a valid email address",
+        },
     },
     password: {
         required: true,
@@ -27,20 +26,20 @@ const userSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        default: '',
+        default: "",
     },
     type: {
         type: String,
-        default: 'user',
+        default: "user",
     },
-    card: [
+    cart: [
         {
-            product: productSchema,
+        product: productSchema,
             quantity: {
                 type: Number,
                 required: true,
             },
-        }, 
+        },
     ],
 });
 

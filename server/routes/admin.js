@@ -1,8 +1,8 @@
 const express = require("express");
 const adminRouter = express.Router();
-const admin = require('../middlewares/admin');
+const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
-const { findOne } = require("../models/user");
+const { PromiseProvider } = require("mongoose");
 
 //* ----------Add Product---------- *//
 adminRouter.post("/admin/add-product", admin, async (req, res) => {

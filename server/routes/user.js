@@ -20,8 +20,8 @@ userRouter.post("api/add-to-cart", auth, async(req, res)=>{
                 }
             }
             if (isProductFound) {
-                let product2 = user.cart.find((product1) => product1.product._id.equals(product._id));
-                product2.quantity += 1;
+                let producttt = user.cart.find((productt) => productt.product._id.equals(product._id));
+                producttt.quantity += 1;
             } else {
                 user.cart.push({ product, quantity: 1 });
             }
