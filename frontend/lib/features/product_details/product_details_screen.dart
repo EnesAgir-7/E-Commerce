@@ -11,7 +11,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  ProductDetailScreen({
+  const ProductDetailScreen({
     Key? key,
     required this.product,
   }) : super(key: key);

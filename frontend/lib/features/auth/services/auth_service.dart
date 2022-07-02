@@ -29,12 +29,13 @@ class AuthService {
         address: '',
         type: '',
         token: '',
+        cart: [],
       );
 
       http.Response res = await http.post(
         Uri.parse('$uri/api/signup'),
         body: user.toJson(),
-        headers: <String, String>{
+        headers: < String, String > {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
