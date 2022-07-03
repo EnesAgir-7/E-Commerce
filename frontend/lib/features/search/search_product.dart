@@ -72,7 +72,7 @@ class SearchedProduct extends StatelessWidget {
                       width: 235,
                       padding: const EdgeInsets.only(left: 10, top: 5),
                       child: Text(
-                        '${product.quantity} peace in stoke',
+                        '${product.quantity.toStringAsFixed(0)} piece in stoke',
                         style: const TextStyle(
                           color: Colors.teal,
                         ),
