@@ -1,4 +1,4 @@
-import 'package:ea_software/constants/loader.dart';
+import 'package:ea_software/common/loader.dart';
 import 'package:ea_software/features/account/widgets/single_product.dart';
 import 'package:ea_software/features/admin/screens/add_product_screen.dart';
 import 'package:ea_software/features/admin/services/admin_services.dart';

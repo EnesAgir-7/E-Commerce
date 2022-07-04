@@ -1,5 +1,5 @@
 import 'package:ea_software/constants/global_variables.dart';
-import 'package:ea_software/constants/loader.dart';
+import 'package:ea_software/common/loader.dart';
 import 'package:ea_software/features/home/widgets/address_box.dart';
 import 'package:ea_software/features/product_details/product_details_screen.dart';
 import 'package:ea_software/features/search/search_product.dart';

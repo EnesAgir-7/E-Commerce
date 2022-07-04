@@ -1,5 +1,5 @@
 import 'package:ea_software/constants/global_variables.dart';
-import 'package:ea_software/constants/loader.dart';
+import 'package:ea_software/common/loader.dart';
 import 'package:ea_software/features/home/services/home_services.dart';
 import 'package:ea_software/features/product_details/product_details_screen.dart';
 import 'package:ea_software/models/product.dart';
