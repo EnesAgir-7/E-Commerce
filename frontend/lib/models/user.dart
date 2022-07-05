@@ -9,6 +9,7 @@ class User {
   final String type;
   final String token;
   final List<dynamic> cart;
+
   User({
     required this.id,
     required this.name,
@@ -26,6 +27,7 @@ class User {
       'name': name,
       'email': email,
       'password': password,
+      'address': address,
       'type': type,
       'token': token,
       'cart': cart,
@@ -52,6 +54,7 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
 
   //! copyWith class be able to only use and copy with onw value
   //^ exp have the id name email ... all of this typed in and 
