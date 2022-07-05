@@ -1,4 +1,5 @@
 import 'package:ea_software/constants/global_variables.dart';
+import 'package:ea_software/features/cart/cart_screen.dart';
 import 'package:ea_software/features/home/screens/home_screen.dart';
 import 'package:ea_software/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text('Card Page'),
-    ),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {
@@ -38,6 +37,7 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     //^ context.watch is sort syntax for Provider.ofContext
     final userCartLen = context.watch<UserProvider>().user.cart.length;
+
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -50,50 +50,69 @@ class _BottomBarState extends State<BottomBar> {
         items: [
           //& Home
           BottomNavigationBarItem(
-              icon: Container(
-                width: bottomBarWidth,
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                  color: _page == 0 ? GlobalVariables.selectedNavBarColor : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-                ))),
-                child: const Icon(Icons.home_outlined),
-              ),
-              label: ''),
-          //& Profile
-          BottomNavigationBarItem(
-              icon: Container(
-                width: bottomBarWidth,
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                  color: _page == 1 ? GlobalVariables.selectedNavBarColor : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-                ))),
-                child: const Icon(Icons.person_outline),
-              ),
-              label: ''),
-          //& Card
-          BottomNavigationBarItem(
-              icon: Container(
-                width: bottomBarWidth,
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                  color: _page == 2 ? GlobalVariables.selectedNavBarColor : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-                ))),
-                child: Badge(
-                  elevation: 0,
-                  badgeContent: Text(userCartLen.toString()),
-                  badgeColor: Colors.white,
-                  child: const Icon(
-                    Icons.shopping_cart_outlined,
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 0
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              label: ''),
+              child: const Icon(
+                Icons.home_outlined,
+              ),
+            ),
+            label: '',
+          ),
+          //& Profile
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 1
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.person_outline_outlined,
+              ),
+            ),
+            label: '',
+          ),
+          //& Card
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 2
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: Badge(
+                elevation: 0,
+                badgeContent: Text(userCartLen.toString()),
+                badgeColor: Colors.white,
+                child: const Icon(
+                  Icons.shopping_cart_outlined,
+                ),
+              ),
+            ),
+            label: '',
+          ),
         ],
       ),
     );
