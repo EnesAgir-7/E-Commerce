@@ -30,8 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   fetchSearchedProduct() async {
-    products = await searchServices.fetchSearchedProduct(
-        context: context, searchQuery: widget.searchQuery);
+    products = await searchServices.fetchSearchedProduct(context: context, searchQuery: widget.searchQuery);
     setState(() {});
   }
 
@@ -53,6 +52,15 @@ class _SearchScreenState extends State<SearchScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/EA.png',
+                  height: 45,
+                  width: 45,
+                  color: Colors.black,
+                ),
+              ),
               Expanded(
                 child: Container(
                   height: 42,
@@ -103,12 +111,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
-              ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.mic, color: Colors.black, size: 25),
               ),
             ],
           ),

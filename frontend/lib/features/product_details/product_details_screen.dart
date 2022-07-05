@@ -48,7 +48,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   void addToCart() {
-    productDetailsServices.addToCart(context: context, product: widget.product,);
+    productDetailsServices.addToCart(
+      context: context,
+      product: widget.product,
+    );
   }
 
   @override
@@ -66,6 +69,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/EA.png',
+                  height: 45,
+                  width: 45,
+                  color: Colors.black,
+                ),
+              ),
               Expanded(
                 child: Container(
                   height: 42,
@@ -112,16 +124,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(
-                  Icons.mic,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              )
             ],
           ),
         ),

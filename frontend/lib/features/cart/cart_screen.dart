@@ -36,6 +36,15 @@ class _CartScreenState extends State<CartScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/EA.png',
+                  height: 45,
+                  width: 45,
+                  color: Colors.black,
+                ),
+              ),
               Expanded(
                 child: Container(
                   height: 42,
@@ -87,12 +96,6 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(Icons.mic, color: Colors.black, size: 25),
-              ),
             ],
           ),
         ),
@@ -110,16 +113,12 @@ class _CartScreenState extends State<CartScreen> {
                 color: Colors.yellow,
               ),
             ),
-            const SizedBox(
-              height: 15
-            ),
+            const SizedBox(height: 15),
             Container(
               color: Colors.black12.withOpacity(0.08),
               height: 1,
             ),
-            const SizedBox(
-              height: 5
-            ),
+            const SizedBox(height: 5),
             ListView.builder(
               itemCount: user.cart.length,
               shrinkWrap: true,

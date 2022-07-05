@@ -34,6 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/EA.png',
+                  height: 45,
+                  width: 45,
+                  color: Colors.black,
+                ),
+              ),
               Expanded(
                 child: Container(
                   height: 42,
@@ -80,16 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(
-                  Icons.mic,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              )
             ],
           ),
         ),
