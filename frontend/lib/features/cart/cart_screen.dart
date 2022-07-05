@@ -100,36 +100,47 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const AddressBox(),
-            const CartSubtotal(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomButton(
-                onTap: () {},
-                text: 'Finnish to shopping buy (${user.cart.length}) item',
-                color: Colors.yellow,
-              ),
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              
+              children: [
+                const AddressBox(),
+                
+                const SizedBox(height: 15),
+                Container(
+                  color: Colors.black12.withOpacity(0.08),
+                  height: 1,
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  height: 480,
+                  child: ListView.builder(
+                    
+                    itemCount: user.cart.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return CartProduct(
+                        index: index,
+                      );
+                    },
+                  ),
+                ),
+                
+              ],
             ),
-            const SizedBox(height: 15),
-            Container(
-              color: Colors.black12.withOpacity(0.08),
-              height: 1,
-            ),
-            const SizedBox(height: 5),
-            ListView.builder(
-              itemCount: user.cart.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return CartProduct(
-                  index: index,
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+          const CartSubtotal(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomButton(
+                    onTap: () {},
+                    text: 'Finnish to shopping buy (${user.cart.length}) item',
+                    color: Colors.yellow,
+                  ),
+                ),
+        ],
       ),
     );
   }
