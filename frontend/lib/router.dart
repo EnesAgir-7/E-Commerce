@@ -1,4 +1,5 @@
 import 'package:ea_software/common/bottom_bar.dart';
+import 'package:ea_software/features/address/address_screen.dart';
 import 'package:ea_software/features/admin/screens/add_product_screen.dart';
 import 'package:ea_software/features/home/screens/category_deal_screen.dart';
 import 'package:ea_software/features/home/screens/home_screen.dart';
@@ -56,7 +57,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           product: product,
         ),
       );
-    default: 
+    case AddressScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => AddressScreen(
+        ),
+      );
+    default:  
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const Scaffold(

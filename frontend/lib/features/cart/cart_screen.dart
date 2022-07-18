@@ -1,5 +1,6 @@
 import 'package:ea_software/common/custom_button.dart';
 import 'package:ea_software/constants/global_variables.dart';
+import 'package:ea_software/features/address/address_screen.dart';
 import 'package:ea_software/features/cart/widgets/cart_product.dart';
 import 'package:ea_software/features/cart/widgets/cart_subtotal.dart';
 import 'package:ea_software/features/home/widgets/address_box.dart';
@@ -18,6 +19,10 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void navigateToAddress() {
+    Navigator.pushNamed(context, AddressScreen.routeName);
   }
 
   @override
@@ -108,7 +113,7 @@ class _CartScreenState extends State<CartScreen> {
                 const AddressBox(),
                 const SizedBox(height: 10),
                 Container(
-                  height: 480,
+                  height: 500,
                   child: ListView.builder(
                     itemCount: user.cart.length,
                     shrinkWrap: true,
@@ -122,11 +127,15 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
           ),
+          Container(
+            color: Colors.black38.withOpacity(0.08),
+            height: 2,
+          ),
           const CartSubtotal(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 8,right: 8),
             child: CustomButton(
-              onTap: () {},
+              onTap: navigateToAddress,
               text: 'Finnish to shopping buy (${user.cart.length}) item',
               color: Colors.yellow,
             ),
