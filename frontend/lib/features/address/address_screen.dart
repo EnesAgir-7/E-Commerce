@@ -1,12 +1,15 @@
 import 'package:ea_software/common/custom_textfield.dart';
 import 'package:ea_software/constants/global_variables.dart';
+import 'package:ea_software/constants/utils.dart';
 import 'package:ea_software/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 class AddressScreen extends StatefulWidget {
-  AddressScreen({Key? key}) : super(key: key);
+  AddressScreen({Key? key, required this.totalAmount}) : super(key: key);
   static const String routeName = '/address';
+  final String totalAmount;
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -20,6 +23,19 @@ class _AddressScreenState extends State<AddressScreen> {
   final _addressFormKey = GlobalKey<FormState>();
 
   String addressToBeUsed = "";
+  List<PaymentItem> paymentItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    paymentItems.add(
+      PaymentItem(
+        amount: widget.totalAmount,
+        label: 'Total Amount',
+        status: PaymentItemStatus.final_price,
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -28,6 +44,58 @@ class _AddressScreenState extends State<AddressScreen> {
     cityController.dispose();
     pincodeController.dispose();
     stateController.dispose();
+  }
+
+  void onApplePayResult(res) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      // addressServices.saveUserAddress(
+      //     context: context, address: addressToBeUsed);
+    }
+    // addressServices.placeOrder(
+    //   context: context,
+    //   address: addressToBeUsed,
+    //   totalSum: double.parse(widget.totalAmount),
+    // );
+  }
+
+  void onGooglePayResult(res) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      // addressServices.saveUserAddress(
+      //     context: context, address: addressToBeUsed);
+    }
+    // addressServices.placeOrder(
+    //   context: context,
+    //   address: addressToBeUsed,
+    //   totalSum: double.parse(widget.totalAmount),
+    // );
+  }
+
+  void payPressed(String addressFromProvider) {
+    addressToBeUsed = "";
+
+    bool isForm = streetController.text.isNotEmpty ||
+        stateController.text.isNotEmpty ||
+        pincodeController.text.isNotEmpty ||
+        cityController.text.isNotEmpty;
+
+    if (isForm) {
+      if (_addressFormKey.currentState!.validate()) {
+        addressToBeUsed =
+            '${streetController.text}, ${cityController.text} - ${pincodeController.text}, ${stateController.text}';
+      } else {
+        throw Exception('Please enter all the values!');
+      }
+    } else if (addressFromProvider.isNotEmpty) {
+      addressToBeUsed = addressFromProvider;
+    } else {
+      showSnackBar(context, 'ERROR');
+    }
   }
 
   @override
@@ -118,6 +186,31 @@ class _AddressScreenState extends State<AddressScreen> {
                     ),
                     const SizedBox(height: 10),
                   ],
+                ),
+              ),
+              ApplePayButton(
+                width: double.infinity,
+                style: ApplePayButtonStyle.whiteOutline,
+                type: ApplePayButtonType.buy,
+                paymentConfigurationAsset: 'applepay.json',
+                onPaymentResult: onApplePayResult,
+                paymentItems: paymentItems,
+                margin: const EdgeInsets.only(top: 15),
+                height: 50,
+                onPressed: () => payPressed(address),
+              ),
+              const SizedBox(height: 10),
+              GooglePayButton(
+                onPressed: () => payPressed(address),
+                paymentConfigurationAsset: 'gpay.json',
+                onPaymentResult: onGooglePayResult,
+                paymentItems: paymentItems,
+                height: 50,
+                style: GooglePayButtonStyle.black,
+                type: GooglePayButtonType.buy,
+                margin: const EdgeInsets.only(top: 15),
+                loadingIndicator: const Center(
+                  child: CircularProgressIndicator(),
                 ),
               ),
             ],
