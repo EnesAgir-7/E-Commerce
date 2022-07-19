@@ -5,6 +5,7 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:ea_software/constants/error_handling.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/constants/utils.dart';
+import 'package:ea_software/models/order.dart';
 import 'package:ea_software/models/product.dart';
 import 'package:ea_software/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -129,5 +130,36 @@ class AdminServices {
     }
   }
 
+  //* ---------- All Orders ---------- *//
+  Future<List<Order>> fetchAllOrders(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Order> orderList = [];
+    try {
+      http.Response res = await http.get(Uri.parse('$uri/admin/get-orders'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
 
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            orderList.add(
+              Order.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return orderList;
+  }
+
+  
 }
