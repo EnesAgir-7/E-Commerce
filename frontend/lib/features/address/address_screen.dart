@@ -1,6 +1,7 @@
 import 'package:ea_software/common/custom_textfield.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/constants/utils.dart';
+import 'package:ea_software/features/address/address_services.dart';
 import 'package:ea_software/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
@@ -24,6 +25,7 @@ class _AddressScreenState extends State<AddressScreen> {
 
   String addressToBeUsed = "";
   List<PaymentItem> paymentItems = [];
+  final AddressServices addressServices = AddressServices();
 
   @override
   void initState() {
@@ -51,14 +53,14 @@ class _AddressScreenState extends State<AddressScreen> {
         .user
         .address
         .isEmpty) {
-      // addressServices.saveUserAddress(
-      //     context: context, address: addressToBeUsed);
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
     }
-    // addressServices.placeOrder(
-    //   context: context,
-    //   address: addressToBeUsed,
-    //   totalSum: double.parse(widget.totalAmount),
-    // );
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
   }
 
   void onGooglePayResult(res) {
@@ -66,14 +68,14 @@ class _AddressScreenState extends State<AddressScreen> {
         .user
         .address
         .isEmpty) {
-      // addressServices.saveUserAddress(
-      //     context: context, address: addressToBeUsed);
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
     }
-    // addressServices.placeOrder(
-    //   context: context,
-    //   address: addressToBeUsed,
-    //   totalSum: double.parse(widget.totalAmount),
-    // );
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
   }
 
   void payPressed(String addressFromProvider) {

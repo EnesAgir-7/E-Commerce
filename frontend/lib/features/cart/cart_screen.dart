@@ -1,5 +1,4 @@
 import 'package:ea_software/common/custom_button.dart';
-import 'package:ea_software/common/dimensions.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/features/address/address_screen.dart';
 import 'package:ea_software/features/cart/widgets/cart_product.dart';
