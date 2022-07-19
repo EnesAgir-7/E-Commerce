@@ -8,19 +8,22 @@ import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 class AddressScreen extends StatefulWidget {
-  AddressScreen({Key? key, required this.totalAmount}) : super(key: key);
   static const String routeName = '/address';
   final String totalAmount;
+  const AddressScreen({
+    Key? key,
+    required this.totalAmount,
+  }) : super(key: key);
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
 }
 
 class _AddressScreenState extends State<AddressScreen> {
-  final TextEditingController streetController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
+  final TextEditingController flatBuildingController = TextEditingController();
+  final TextEditingController areaController = TextEditingController();
   final TextEditingController pincodeController = TextEditingController();
-  final TextEditingController stateController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
 
   String addressToBeUsed = "";
@@ -42,10 +45,10 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   void dispose() {
     super.dispose();
-    streetController.dispose();
-    cityController.dispose();
+    flatBuildingController.dispose();
+    areaController.dispose();
     pincodeController.dispose();
-    stateController.dispose();
+    cityController.dispose();
   }
 
   void onApplePayResult(res) {
@@ -81,15 +84,15 @@ class _AddressScreenState extends State<AddressScreen> {
   void payPressed(String addressFromProvider) {
     addressToBeUsed = "";
 
-    bool isForm = streetController.text.isNotEmpty ||
-        stateController.text.isNotEmpty ||
+    bool isForm = flatBuildingController.text.isNotEmpty ||
+        areaController.text.isNotEmpty ||
         pincodeController.text.isNotEmpty ||
         cityController.text.isNotEmpty;
 
     if (isForm) {
       if (_addressFormKey.currentState!.validate()) {
         addressToBeUsed =
-            '${streetController.text}, ${cityController.text} - ${pincodeController.text}, ${stateController.text}';
+            '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
       } else {
         throw Exception('Please enter all the values!');
       }
@@ -103,7 +106,7 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     var address = context.watch<UserProvider>().user.address;
-    
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -113,21 +116,6 @@ class _AddressScreenState extends State<AddressScreen> {
               gradient: GlobalVariables.appBarGradient,
             ),
           ),
-          title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: Image.asset(
-                'assets/EA.png',
-                height: 45,
-                width: 45,
-                color: Colors.black,
-              ),
-            ),
-            const Text(
-              '',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-          ]),
         ),
       ),
       body: SingleChildScrollView(
@@ -158,7 +146,9 @@ class _AddressScreenState extends State<AddressScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       'OR',
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                     const SizedBox(height: 20),
                   ],
@@ -168,13 +158,13 @@ class _AddressScreenState extends State<AddressScreen> {
                 child: Column(
                   children: [
                     CustomTextField(
-                      controller: streetController,
-                      hintText: 'Street, House no',
+                      controller: flatBuildingController,
+                      hintText: 'Flat, House no, Building',
                     ),
                     const SizedBox(height: 10),
                     CustomTextField(
-                      controller: cityController,
-                      hintText: 'City',
+                      controller: areaController,
+                      hintText: 'Area, Street',
                     ),
                     const SizedBox(height: 10),
                     CustomTextField(
@@ -183,8 +173,8 @@ class _AddressScreenState extends State<AddressScreen> {
                     ),
                     const SizedBox(height: 10),
                     CustomTextField(
-                      controller: stateController,
-                      hintText: 'State',
+                      controller: cityController,
+                      hintText: 'Town/City',
                     ),
                     const SizedBox(height: 10),
                   ],

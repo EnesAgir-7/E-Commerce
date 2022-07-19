@@ -2,6 +2,7 @@ import 'package:ea_software/common/loader.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/features/account/services/account_services.dart';
 import 'package:ea_software/features/account/widgets/single_product.dart';
+import 'package:ea_software/features/order_details/order_details.dart';
 import 'package:ea_software/models/order.dart';
 import 'package:flutter/material.dart';
 
@@ -75,11 +76,11 @@ class _OrdersState extends State<Orders> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   OrderDetailScreen.routeName,
-                        //   arguments: orders![index],
-                        // );
+                        Navigator.pushNamed(
+                          context,
+                          OrderDetailScreen.routeName,
+                          arguments: orders![index],
+                        );
                       },
                       child: SingleProduct(
                         image: orders![index].products[0].images[0],
