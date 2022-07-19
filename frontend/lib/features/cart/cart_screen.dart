@@ -1,4 +1,5 @@
 import 'package:ea_software/common/custom_button.dart';
+import 'package:ea_software/common/dimensions.dart';
 import 'package:ea_software/constants/global_variables.dart';
 import 'package:ea_software/features/address/address_screen.dart';
 import 'package:ea_software/features/cart/widgets/cart_product.dart';
@@ -121,7 +122,8 @@ class _CartScreenState extends State<CartScreen> {
                 const AddressBox(),
                 const SizedBox(height: 10),
                 Container(
-                  height: 500,
+                  //!!-----Buraya bir cozum bul-----!!\\
+                  height: 480,
                   child: ListView.builder(
                     itemCount: user.cart.length,
                     shrinkWrap: true,
