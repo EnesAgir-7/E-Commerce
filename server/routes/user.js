@@ -97,9 +97,7 @@ userRouter.post("/api/order", auth, async (req, res) => {
             } else {
                 return res
                     .status(400)
-                    .json({
-                        msg: `${product.name} is out of stock!`
-                    });
+                    .json({ msg: `${product.name} is out of stock!` });
             }
         }
 
@@ -114,13 +112,20 @@ userRouter.post("/api/order", auth, async (req, res) => {
             userId: req.user,
             orderedAt: new Date().getTime(),
         });
-        
+
         order = await order.save();
         res.json(order);
     } catch (e) {
-        res.status(500).json({
-            error: e.message
-        });
+        res.status(500).json({ error: e.message });
+    }
+});
+
+userRouter.get("/api/orders/me", auth, async (req, res) => {
+    try {
+        const orders = await Order.find({ userId: req.user });
+        res.json(orders);
+    } catch (e) {
+        res.status(500).json({ error: e.message });
     }
 });
 
